@@ -39,7 +39,7 @@ def post_state():
     if dico is None:
         abort(404, description="Not a JSON")
 
-    if 'name' not in dico:
+    if dico['name'] is None:
         abort(404, description="Missing name")
 
     new_state = State(**dico)
