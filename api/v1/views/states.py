@@ -37,10 +37,10 @@ def post_state():
     dico = request.get_json
 
     if dico is None:
-        abort(404, description="Not a JSON")
+        abort(400, "Not a JSON")
 
-    if dico['name'] is None:
-        abort(404, description="Missing name")
+    if dico.get("name") is None:
+        abort(400, "Missing name")
 
     new_state = State(**dico)
 
