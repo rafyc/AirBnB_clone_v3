@@ -34,7 +34,7 @@ def delete_state(state_id):
 @app_views.route('/states/', methods=['POST'], strict_slashes=False)
 def post_state():
     """ Function that create a state """
-    dico = request.get_json
+    dico = request.get_json()
 
     if dico is None:
         abort(400, "Not a JSON")
@@ -53,10 +53,10 @@ def put_state(state_id):  # sourcery skip: assign-if-exp, reintroduce-else
     if state is None:
         return abort(404)
 
-    dico = request.get_json
+    dico = request.get_json()
 
     if dico is None:
-        abort(404, description="Not a JSON")
+        abort(400, "Not a JSON")
 
     for key, value in dico.items():
         if key not in ['id', 'created_at', 'updated_at']:
