@@ -43,6 +43,7 @@ def post_state():
         abort(400, "Missing name")
 
     new_state = State(**dico)
+    new_state.save()
 
     return jsonify(new_state.to_dict()), 201
 
@@ -64,3 +65,4 @@ def put_state(state_id):  # sourcery skip: assign-if-exp, reintroduce-else
     state.save()
 
     return jsonify(state.to_dict()), 200
+
