@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -16,5 +16,11 @@ def teardown_db(exception):
     """closes the storage on teardown"""
     storage.close()
 
+@app.errorhandler(404)
+def page_not_found(exception):
+    """ Custom 404 error """
+    return jsonify({"error": "Not found"}), 404
+
 if __name__ == '__main__':
+    app.debug = True
     app.run(host=host, port=port, threaded=True)

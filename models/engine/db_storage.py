@@ -3,8 +3,6 @@
 Contains the class DBStorage
 """
 
-from asyncio.windows_events import NULL
-from itertools import count
 import models
 from models.amenity import Amenity
 from models.base_model import BaseModel, Base
@@ -17,7 +15,6 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from models import storage
 
 classes = {"Amenity": Amenity, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -82,7 +79,7 @@ class DBStorage:
         """A method to retrieve one object"""
         if cls is None or id is None:
             return (None)
-        dict_obj = storage.all(cls)
+        dict_obj = models.storage.all(cls)
         for key in dict_obj:
             if dict_obj[key].id == id:
                 return dict_obj[key]
@@ -90,4 +87,4 @@ class DBStorage:
 
     def count(self, cls=None):
         """A method to count the number of objects in storage"""
-        return (len(storage.all())) if cls is None else (len(storage.all(cls)))
+        return (len(models.storage.all())) if cls is None else (len(models.storage.all(cls)))

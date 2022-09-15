@@ -11,7 +11,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-from models import storage
+import models
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -72,7 +72,7 @@ class FileStorage:
 
     def get(self, cls, id):  # sourcery skip: use-next
         """"A method to retrieve one object"""
-        all_object = storage.all(cls)
+        all_object = models.storage.all(cls)
         for obj in all_object:
             if all_object[obj].id == id:
                 return all_object[obj]
@@ -82,5 +82,5 @@ class FileStorage:
     def count(self, cls=None):
         """A method to count the number of objects in storage"""
         if cls is None:
-            return len(storage.all())
-        return len(storage.all(cls))
+            return len(models.storage.all())
+        return len(models.storage.all(cls))
