@@ -6,8 +6,6 @@ from models import storage
 from models.place import Place
 from models.amenity import Amenity
 from os import getenv
-import models
-
 
 @app_views.route('/places/<place_id>/amenities', methods=['GET'],
                  strict_slashes=False)
@@ -38,11 +36,11 @@ def delete_amenity(amenity_id, place_id):
     if amenity not in place.amenities:
         return abort(404)
 
-    if models.storage_t == 'db':
-        place.amenities.remove(amenity)
-    else:
-        place.amenity_ids.remove(amenity.id)
-    place.save()
+    # if getenv('HBNB_MYSQL_DB') == 'db':
+    #     place.amenities.remove(amenity)
+    # else:
+    #     place.amenity_ids.remove(amenity.id)
+    # place.save()
 
     amenity.delete()
     storage.save()
@@ -65,7 +63,7 @@ def place_aminity(place_id, amenity_id):
     if amenity in place.amenities:
         return jsonify(amenity.to_dict()), 200
 
-    if models.storage_t == 'db':
+    if getenv('HBNB_MYSQL_DB') == 'db':
         place.amenities.append(amenity)
     else:
         place.amenity_ids.append(amenity.id)
