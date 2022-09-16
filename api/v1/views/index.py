@@ -16,6 +16,7 @@ def status():
     """HBNB Status"""
     return jsonify({"status": "OK"})
 
+
 @app_views.route('/stats', strict_slashes=False)
 def stats():
     """HBNB Stats"""
@@ -28,5 +29,3 @@ def stats():
         "users": models.storage.count(User)
     }
     return my_dict
-
-
