@@ -36,11 +36,11 @@ def delete_amenity(amenity_id, place_id):
     if amenity not in place.amenities:
         return abort(404)
 
-    # if getenv('HBNB_MYSQL_DB') == 'db':
-    #     place.amenities.remove(amenity)
-    # else:
-    #     place.amenity_ids.remove(amenity.id)
-    # place.save()
+    if getenv('HBNB_MYSQL_DB') == 'db':
+        place.amenities.remove(amenity)
+    else:
+        place.amenity_ids.remove(amenity.id)
+    place.save()
 
     amenity.delete()
     storage.save()
