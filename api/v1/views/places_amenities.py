@@ -7,6 +7,7 @@ from models.place import Place
 from models.amenity import Amenity
 from os import getenv
 
+
 @app_views.route('/places/<place_id>/amenities', methods=['GET'],
                  strict_slashes=False)
 def get_all_place_amenities(place_id):
@@ -15,10 +16,10 @@ def get_all_place_amenities(place_id):
     if place is None:
         return abort(404)
 
-    all_aminities = []
-    for amenity in place.aminities:
-        all_aminities.append(amenity.to_dict())
-    return jsonify(all_aminities)
+    all_amenities = []
+    for amenity in place.amenities:
+        all_amenities.append(amenity.to_dict())
+    return jsonify(all_amenities)
 
 
 @app_views.route('places/<place_id>/amenities/<amenity_id>',
@@ -43,7 +44,7 @@ def delete_place_amenity(amenity_id, place_id):
 
 @app_views.route('places/<place_id>/amenities/<amenity_id>',
                  methods=['POST'], strict_slashes=False)
-def place_aminity(place_id, amenity_id):
+def place_amenity(place_id, amenity_id):
     """ Function that create a place amenity"""
 
     place = storage.get(Place, place_id)
