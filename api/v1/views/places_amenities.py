@@ -24,7 +24,7 @@ def get_all_amenities(place_id):
 
 @app_views.route('places/<place_id>/amenities/<amenity_id>',
                  methods=['DELETE'], strict_slashes=False)
-def delete_review(amenity_id, place_id):
+def delete_amenity(amenity_id, place_id):
     """ Function that deletes a review """
     place = storage.get(Place, place_id)
     if place is None:
@@ -44,7 +44,7 @@ def delete_review(amenity_id, place_id):
 
 @app_views.route('places/<place_id>/amenities/<amenity_id>',
                  methods=['POST'], strict_slashes=False)
-def aminity_review(place_id, amenity_id):
+def place_aminity(place_id, amenity_id):
     """ Function that create a place amenity"""
 
     place = storage.get(Place, place_id)
