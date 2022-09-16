@@ -30,7 +30,7 @@ def delete_place_amenity(amenity_id, place_id):
     if place is None:
         return abort(404)
 
-    amenity = storage.get(amenity, amenity_id)
+    amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         return abort(404)
 
